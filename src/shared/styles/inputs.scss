@@ -1,0 +1,66 @@
+@import './colors.scss';
+
+// --------- style for form fields field ----------------
+
+.form-field{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    > .wrapper-ipt-field{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border: 1px solid $prim-color;
+        border-radius: 12px;
+        > input{
+            color: $prim-color;
+            flex-grow: 2;
+            font-size: 18px;
+            &::placeholder{
+                color: $prim-color;
+            }
+        }
+        > .wrapper-show-pwd{
+            display: flex;
+            align-items: center;
+            > input{
+                display: none;
+            }
+            > label{
+                width: 24px;
+                aspect-ratio: 1;
+                cursor: pointer;
+                mask-image: url("./../../assets/icons/eye.svg");
+                mask-repeat: no-repeat;
+                mask-position: 50% 50%;
+                mask-size: contain;
+                background-color: $prim-color;
+            }
+            > input:checked + label{
+                mask-image: url("./../../assets/icons/eye_hide.svg");
+            }
+        }
+    }
+    > .wrapper-err-msg{
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: $err-color;
+        font-size: 15px;
+    }
+
+}
+
+// --------- style for input field ----------------
+.ipt-txt{
+    border: 1px solid $fnt-color-light;
+    border-radius: 40px;
+    padding: 12px 24px;
+    border-color: $fnt-color-light;
+    color: $fnt-color-light;
+    font-size: 18px;
+    &::placeholder{
+        color: $fnt-color-light;
+    }
+}

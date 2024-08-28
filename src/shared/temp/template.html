@@ -1,0 +1,50 @@
+<div style="padding: 20px; display: flex; flex-direction: column; gap: 10px; width:500px; gap: 10px; background-color: grey;">
+    
+    
+    <form action="">
+        <div class="form-field">
+            <div class="wrapper-ipt-field">
+                <input class="ipt ipt-form-field-txt" type="text" placeholder="Form Text">
+            </div>
+            <div class="wrapper-err-msg">
+                <img src="assets/icons/warning.svg" alt="warning">
+                <span>Error Massage</span>
+            </div>
+        </div>
+        <div class="form-field">
+            <div class="wrapper-ipt-field">
+                <input type="password" placeholder="Form Password">
+                <div class="wrapper-show-pwd">
+                    <input type="checkbox" name="" id="show-pwd">
+                    <label for="show-pwd"></label>
+                </div>
+            </div>
+            <div class="wrapper-err-msg">
+                <img src="assets/icons/warning.svg" alt="warning">
+                <span>Error Massage</span>
+            </div>
+        </div>
+    </form>
+
+    <input class="ipt-txt" type="text" placeholder="Normal text">
+
+
+    <button class="btn btn-primary">
+        <span>Test</span>
+        <img src="assets/icons/chevron_right.svg" alt="">
+    </button>
+
+    <button class="btn btn-primary" [disabled]="true">
+        <span>Test</span>
+        <img src="assets/icons/chevron_right.svg" alt="">
+    </button>
+
+    <button class="btn btn-secondary">
+        <span>Test</span>
+    </button>
+
+    <button class="btn btn-icon"></button>
+
+    <button class="btn btn-link"> Btn Link </button>
+
+</div>
