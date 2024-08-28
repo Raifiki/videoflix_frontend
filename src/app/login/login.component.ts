@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 // import custom components
 import { HeaderComponent } from '../../shared/components/header/header.component';
@@ -20,15 +20,56 @@ import { RouterModule } from '@angular/router';
 })
 export class LoginComponent {
   @ViewChild('iptPwd') iptElement!: ElementRef;
+  loginFailed: boolean = false;
 
-  onSubmit(){
-    console.log('submitted');
+  email: string = '';
+  password: string = '';
+  rememberMe: boolean = false;
+
+  constructor() {
+    this.setFormData()
+  }
+  
+  onSubmit(form:NgForm){
+    if (true){
+      // ToDo: Check Login Data with Server and if correct save to local storate and redirect to Video dashboard, if not show error
+      this.handleLocalStorageData();
+    }
+    else {
+      this.loginFailed = true;
+      form.reset();
+    }
   }
 
+  handleLocalStorageData(){
+    if(this.rememberMe)
+      this.storeLoginData(this.email, this.password);
+     else 
+      localStorage.removeItem('loginData');
+  }
   toggleShowPassword(){
     if (this.iptElement.nativeElement.type === 'password')
       this.iptElement.nativeElement.type = 'text';
     else
       this.iptElement.nativeElement.type = 'password';
+  }
+
+  storeLoginData(email: string, password: string){
+    let loginData = {email, password};
+    localStorage.setItem('loginData', JSON.stringify(loginData));
+  }
+
+  getLoginData():null | string {
+    return localStorage.getItem('loginData');
+  }
+
+  setFormData(){
+    let loginData = this.getLoginData();
+    if (loginData){
+      let {email, password} = JSON.parse(loginData);      
+      this.email= email;
+      this.password= password;
+      this.rememberMe= true;
+    }
   }
 }

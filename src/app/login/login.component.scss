@@ -46,6 +46,9 @@
                 cursor: pointer;
             }
         }
+        > .login-error-msg{
+            color: $err-color;
+        }
     }
 }
 
