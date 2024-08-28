@@ -1,0 +1,49 @@
+@import './../../shared/styles/include.scss';
+
+.signup-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.44) 55%, rgba(0, 0, 0, 0.8) 100%) ,url('./../../assets/img/bg_signup.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    > app-header{
+        width: 100%;
+    }
+}
+
+.signup-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    background-color: $bg-color-light;
+    padding: 43px 56px;
+    border-radius: 48px;
+    width: 520px;
+    > h1{
+        font-size: 48px;
+        color: $prim-color;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        width: 100%;
+        > button{
+            align-self: center;
+        }
+        > .signup-error-wrapper{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            > span{
+                color: $err-color;
+            }
+        }
+    }
+}

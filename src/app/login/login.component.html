@@ -22,7 +22,10 @@
                 <label for="cb-remember-me">Remember me</label>
             </div>
             @if (loginFailed) {
-                <span class="login-error-msg">Wrong email or password, please try again</span>
+                <div class="signup-error-wrapper">
+                    <img src="assets/icons/warning.svg" alt="">
+                    <span>Wrong email or password, please try again</span>
+                </div>
             }
             <button class="btn btn-primary" [disabled]="loginForm.invalid">
                 <span>Log in</span>

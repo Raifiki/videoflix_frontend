@@ -46,8 +46,13 @@
                 cursor: pointer;
             }
         }
-        > .login-error-msg{
-            color: $err-color;
+        > .signup-error-wrapper{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            > span{
+                color: $err-color;
+            }
         }
     }
 }
