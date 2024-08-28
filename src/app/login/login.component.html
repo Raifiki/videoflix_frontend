@@ -1,0 +1,38 @@
+<div class="login-wrapper">
+    <app-header [showLoginBtn]="false"></app-header>
+    <div class="login-card">
+        <h1>Log in</h1>
+        <form (submit)="onSubmit()" #loginForm="ngForm" autocomplete="off">
+            <div class="form-field">
+                <div class="wrapper-ipt-field">
+                    <input class="ipt ipt-form-field-txt" type="text" placeholder="Email Address" ngModel name="email" required>
+                </div>
+            </div>
+            <div class="form-field">
+                <div class="wrapper-ipt-field">
+                    <input type="password" placeholder="Password" #iptPwd ngModel name="password" required>
+                    <div class="wrapper-show-pwd">
+                        <input type="checkbox" name="" id="show-pwd" (change)="toggleShowPassword()">
+                        <label for="show-pwd"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="remember-me-wrapper">
+                <input type="checkbox" name="" id="cb-remember-me">
+                <label for="cb-remember-me">Remember me</label>
+            </div>
+            <button class="btn btn-primary" [disabled]="loginForm.invalid">
+                <span>Log in</span>
+            </button>
+        </form>
+
+        <div class="card-footer">
+            <button class="btn btn-link" routerLink="/ForgotPassword"> Forgot password? </button>
+            <div class="wrapper-signup">
+                <span>New to Videoflix?</span>
+                <button class="btn btn-link" routerLink="/SignUp"> Sign Up now </button>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

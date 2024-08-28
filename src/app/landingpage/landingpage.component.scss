@@ -1,0 +1,43 @@
+@import './../../shared/styles/include.scss';
+
+.landing-page-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.6) 55%, rgba(0, 0, 0, 1) 100%) ,url('./../../assets/img/bg_landingpage.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    > app-header{
+        width: 100%;
+    }
+}
+
+.landing-page-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    color: $fnt-color-light;
+    > h1{
+        font-size: 48px;
+    }
+    > h2{
+        font-size: 24px;
+    }
+    > span{
+        font-size: 18px;
+    }
+    > form{
+        display: flex;
+        gap: 16px;
+        margin-top: 8px;
+        width: 100%;
+        input{
+            flex-grow: 2;
+        }
+    }
+}

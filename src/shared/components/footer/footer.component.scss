@@ -1,0 +1,17 @@
+@import './../../styles/include.scss';
+
+
+.footer-container{
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    >a{
+        font-size: 18px;
+        color: $fnt-color-light;
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    padding: 10px 10px 50px 10px;
+}
