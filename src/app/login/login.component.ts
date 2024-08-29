@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 // import custom components
 import { HeaderComponent } from '../../shared/components/header/header.component';
@@ -26,7 +26,7 @@ export class LoginComponent {
   password: string = '';
   rememberMe: boolean = false;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.setFormData()
   }
   
@@ -39,6 +39,7 @@ export class LoginComponent {
     if (true){
       // ToDo: Check Login Data with Server and if correct save to local storate and redirect to Video dashboard, if not show error
       this.handleLocalStorageData();
+      this.router.navigate(['/Dashboard']);
     }
     else {
       this.loginFailed = true;

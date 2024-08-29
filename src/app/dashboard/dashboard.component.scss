@@ -1,0 +1,97 @@
+@import './../../shared/styles/include.scss';
+
+.dashboard-wrapper{
+    position: relative;
+    background-color: $bg-color-dark;
+    min-height: 100vh;
+    padding-left: 96px;
+    padding-top: 170px;
+    padding-bottom: 60px;
+    >.dashboard-header-wrapper{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px 96px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 108px;
+        z-index: 2;
+    }
+    >.dashboard-preview-wrapper{
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        color: $fnt-color-light;
+        max-width: 440px;
+        > h1{
+            font-size: 88px;
+            font-weight: 700;
+            z-index: 2;
+        }
+        > span, button{
+            z-index: 2;
+        }
+        > app-videoplayer{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 1;
+            overflow: hidden;
+        }
+        > .dashboard-filter-lg-preview{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(to bottom, 
+            rgba(20, 20, 20, 0.6), 
+            rgba(20, 20, 20, 0), 
+            rgba(20, 20, 20, 1), 
+          );
+            background-size: 100% 100%;
+            z-index: 1;
+        }
+    }
+}
+
+.dashboard-video-offer-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    z-index: 2;
+    margin-top: 150px;
+    > .genre-wrapper{
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        z-index: 2;
+        > h2{
+            font-size: 22px;
+            color: $fnt-color-light;
+        }
+    }
+}
+
+
+.video-list{
+    display: flex;
+    gap: 16px;
+    overflow: auto;
+    > .video-data{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        color: $fnt-color-light;
+        > img{
+            cursor: pointer;
+            width: 232px;
+            height: 120px;
+        }
+    }
+}

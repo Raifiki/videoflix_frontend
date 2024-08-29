@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
     {path: '',component: LandingpageComponent},
@@ -13,4 +14,5 @@ export const routes: Routes = [
     {path: 'SignUp',component: SignupComponent},
     {path: 'ForgotPassword',component: ForgotpasswordComponent},
     {path: 'ResetPassword',component: ResetpasswordComponent},
+    {path: 'Dashboard',component: DashboardComponent},
 ];

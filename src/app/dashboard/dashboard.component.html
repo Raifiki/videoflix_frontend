@@ -1,1 +1,40 @@
-<p>dashboard works!</p>
+<div class="dashboard-wrapper">
+    <div class="dashboard-header-wrapper">
+        <img src="assets/img/logo_short.svg" alt="">
+        <button class="btn btn-primary" (click)="logout()">
+            <img src="assets/icons/logout.svg" alt="">
+            <span>Log Out</span>
+        </button>
+    </div>
+    <div class="dashboard-preview-wrapper">
+        <h1>Video Name</h1>
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempore perferendis fuga doloribus quidem, voluptatum, magnam nesciunt, illo omnis officiis repellat aliquam repellendus ipsam animi maiores debitis tempora mollitia numquam?</span>
+        <button class="btn btn-primary" (click)="startVideo()">
+            <img src="assets/icons/play_arrow.svg" alt="">
+            <span>Play</span>
+        </button>
+        <app-videoplayer [options]="{
+        fluid: false,
+        aspectRatio: '16:9',
+        autoplay: true, 
+        controls: false, 
+        sources: 
+            [{ src: 'assets/videos/example1.mp4', type: 'video/mp4' }]}"></app-videoplayer>
+        <div class="dashboard-filter-lg-preview"></div>
+    </div>
+    <div class="dashboard-video-offer-wrapper">
+        @for (genre of videoLibrary; track genre) {
+            <div class="genre-wrapper">
+                <h2>{{genre.name}}</h2>
+                <div class="video-list">
+                    @for (video of genre.videos; track video) {
+                        <div class="video-data">
+                            <img src='{{ video.getPosterImage() }}' alt="">
+                            <h3>{{video.name}}</h3>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
