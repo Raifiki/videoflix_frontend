@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 // import custom components
 import { HeaderComponent } from '../../shared/components/header/header.component';
@@ -23,6 +24,13 @@ export class SignupComponent {
   email: string = '';
   password: string = '';
   passwordConfirm: string = '';
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    const queryParams = this.route.snapshot.queryParams;
+    if(queryParams['email']) this.email = queryParams['email'];
+  }
 
   onSubmit(form: NgForm) {
     if(this.isPasswordMatching()){
