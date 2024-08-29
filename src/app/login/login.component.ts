@@ -1,10 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 // import custom components
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -26,10 +26,15 @@ export class LoginComponent {
   password: string = '';
   rememberMe: boolean = false;
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.setFormData()
   }
   
+  ngOnInit(): void {
+    const queryParams = this.route.snapshot.queryParams;
+    if(queryParams['email']) this.email = queryParams['email'];
+  }
+
   onSubmit(form:NgForm){
     if (true){
       // ToDo: Check Login Data with Server and if correct save to local storate and redirect to Video dashboard, if not show error

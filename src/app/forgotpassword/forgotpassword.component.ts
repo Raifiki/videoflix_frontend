@@ -20,7 +20,9 @@ export class ForgotpasswordComponent {
 
 
   onSubmit(form: NgForm) {
-    console.log('submitted');
+    console.log('submitted forgot pwd');
+    
+    //ToDo: send request to backend and send email
   }
 
 }
