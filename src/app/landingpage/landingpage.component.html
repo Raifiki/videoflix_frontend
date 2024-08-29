@@ -4,7 +4,7 @@
         <h1>Movies, TV shows, and more</h1>
         <h2>Watch whenever you want wherever you want</h2>
         <span>Enter your email to create or restart your subscription.</span>
-        <form>
+        <form autocomplete="off">
             <input class="ipt-txt" type="text" placeholder="Email Address" [(ngModel)]="email" name="email">
             <button class="btn btn-primary"  [routerLink]="['/SignUp']" [queryParams]="getQueryParams()">
                 <span>Sign Up</span>
