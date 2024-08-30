@@ -1,0 +1,14 @@
+<div class="show-video-container">
+    <div class="show-video-header-wrapper">
+        <button class="btn btn-icon" routerLink="/Dashboard"></button>
+        <img src="assets/img/logo_short.svg" alt="">
+    </div>
+    <app-videoplayer [options]="{
+        fluid: false,
+        fill: true,
+        autoplay: true, 
+        controls: true, 
+        sources: 
+            [{ src: video.path, type: 'video/mp4' }]}">
+    </app-videoplayer>
+</div>

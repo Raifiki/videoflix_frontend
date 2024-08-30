@@ -13,9 +13,9 @@ export class VideoplayerComponent implements OnInit, OnDestroy {
   @ViewChild('target', {static: true}) target!: ElementRef;
   @Input() options!: {
     fluid: boolean,
-    aspectRatio: string,
     autoplay: boolean,
     controls: boolean,
+    fill: boolean,
     sources: {
         src: string,
         type: string,

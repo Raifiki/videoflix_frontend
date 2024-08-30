@@ -7,6 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ShowvideoComponent } from './showvideo/showvideo.component';
 
 export const routes: Routes = [
     {path: '',component: LandingpageComponent},
@@ -15,4 +16,5 @@ export const routes: Routes = [
     {path: 'ForgotPassword',component: ForgotpasswordComponent},
     {path: 'ResetPassword',component: ResetpasswordComponent},
     {path: 'Dashboard',component: DashboardComponent},
+    {path: 'Video/:id',component: ShowvideoComponent},
 ];

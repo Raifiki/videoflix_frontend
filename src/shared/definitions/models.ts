@@ -3,6 +3,7 @@ export class Video {
     path: string = '';
     description: string = ''
     genre: string = '';
+    id: string = '';
 
     constructor(videoData?: any) {
         if (videoData){
@@ -10,6 +11,7 @@ export class Video {
             this.path = videoData.path;
             this.description = videoData.description;
             this.genre = videoData.genre;
+            this.id = videoData.id;
         }
     }
 

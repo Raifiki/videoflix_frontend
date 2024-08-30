@@ -2,11 +2,12 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 // import custom interfaces and models
 import { Librarycategory } from '../../../shared/definitions/interfaces';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './category.component.html',
   styleUrl: './category.component.scss'
 })
