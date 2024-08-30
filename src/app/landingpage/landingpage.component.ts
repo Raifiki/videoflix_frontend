@@ -13,7 +13,7 @@ import { FooterComponent } from '../../shared/components/footer/footer.component
     HeaderComponent,
     FooterComponent,
     RouterModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './landingpage.component.html',
   styleUrl: './landingpage.component.scss'

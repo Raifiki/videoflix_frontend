@@ -1,4 +1,4 @@
 <div class="footer-container">
-    <a href="">Privacy policy</a>
-    <a href="">Imprint</a>
+    <a [routerLink]="['/PrivacyPolicy']" [queryParams]="{redirectPage: redirectPage}" >Privacy policy</a>
+    <a [routerLink]="['/Imprint']" [queryParams]="{redirectPage: redirectPage}" >Imprint</a>
 </div>

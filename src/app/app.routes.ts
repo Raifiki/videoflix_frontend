@@ -8,6 +8,8 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShowvideoComponent } from './showvideo/showvideo.component';
+import { ImprintComponent } from './imprint/imprint.component';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 
 export const routes: Routes = [
     {path: '',component: LandingpageComponent},
@@ -17,4 +19,6 @@ export const routes: Routes = [
     {path: 'ResetPassword',component: ResetpasswordComponent},
     {path: 'Dashboard',component: DashboardComponent},
     {path: 'Video/:id',component: ShowvideoComponent},
+    {path: 'Imprint',component: ImprintComponent},
+    {path: 'PrivacyPolicy',component: PrivacypolicyComponent},
 ];
