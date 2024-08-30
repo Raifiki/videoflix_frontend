@@ -1,6 +1,6 @@
 import { Video } from "./models";
 
-export interface Videogenre{
+export interface Librarycategory{
     name: string;
     videos: Video[]
 }

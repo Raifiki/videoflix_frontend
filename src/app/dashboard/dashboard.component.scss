@@ -65,33 +65,7 @@
     gap: 48px;
     z-index: 2;
     margin-top: 150px;
-    > .genre-wrapper{
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
+    > app-category{
         z-index: 2;
-        > h2{
-            font-size: 22px;
-            color: $fnt-color-light;
-        }
-    }
-}
-
-
-.video-list{
-    display: flex;
-    gap: 16px;
-    overflow: auto;
-    > .video-data{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        color: $fnt-color-light;
-        > img{
-            cursor: pointer;
-            width: 232px;
-            height: 120px;
-        }
     }
 }

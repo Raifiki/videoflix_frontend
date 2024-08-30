@@ -5,19 +5,23 @@ import { VideoplayerComponent } from '../../shared/components/videoplayer/videop
 import { Router } from '@angular/router';
 
 // import custom interfaces and models
-import { Videogenre } from '../../shared/definitions/interfaces';
+import { Librarycategory } from '../../shared/definitions/interfaces';
 import { Video } from '../../shared/definitions/models';
+import { CategoryComponent } from './category/category.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [VideoplayerComponent],
+  imports: [
+    VideoplayerComponent,
+    CategoryComponent
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
   // move to service start
-  videoLibrary: Videogenre[] = [
+  videoLibrary: Librarycategory[] = [
     {name: 'Action',
      videos: [
       new Video({

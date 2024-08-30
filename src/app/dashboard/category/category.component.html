@@ -1,0 +1,15 @@
+<div class="category-container">
+    <h2>{{category.name}}</h2>
+    @if (isScrollable) {
+        <button class="btn btn-icon scroll-btn-left" (click)="scrollLeft()"></button>
+        <button class="btn btn-icon scroll-btn-right" (click)="scrollRight()"></button>
+    }
+    <div class="video-list" #scrollContainer>
+        @for (video of category.videos; track video) {
+            <div class="video-details">
+                <img src='{{ video.getPosterImage() }}' alt="">
+                <h3>{{video.name}}</h3>
+            </div>
+        }
+    </div>
+</div>

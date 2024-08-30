@@ -52,6 +52,7 @@
     mask-repeat: no-repeat;
     mask-size: contain;
     mask-position: center;
+    padding: 0;
     &:hover{
         background-color: $prim-color-hover;
         transition: all $hover-time ease-in-out;

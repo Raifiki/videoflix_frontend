@@ -23,18 +23,8 @@
         <div class="dashboard-filter-lg-preview"></div>
     </div>
     <div class="dashboard-video-offer-wrapper">
-        @for (genre of videoLibrary; track genre) {
-            <div class="genre-wrapper">
-                <h2>{{genre.name}}</h2>
-                <div class="video-list">
-                    @for (video of genre.videos; track video) {
-                        <div class="video-data">
-                            <img src='{{ video.getPosterImage() }}' alt="">
-                            <h3>{{video.name}}</h3>
-                        </div>
-                    }
-                </div>
-            </div>
+        @for (category of videoLibrary; track category) {
+            <app-category [category]="category"></app-category>
         }
     </div>
 </div>
