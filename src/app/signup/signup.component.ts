@@ -1,10 +1,14 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 // import custom components
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { ENVIRONEMENT } from '../../environment/environment';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-signup',
@@ -25,18 +29,34 @@ export class SignupComponent {
   password: string = '';
   passwordConfirm: string = '';
 
-  constructor(private route: ActivatedRoute) {}
+  backendUrl = ENVIRONEMENT.backendUrl;
+
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private http: HttpClient) {}
 
   ngOnInit(): void {
     const queryParams = this.route.snapshot.queryParams;
     if(queryParams['email']) this.email = queryParams['email'];
   }
 
-  onSubmit(form: NgForm) {
-    if(this.isPasswordMatching()){
-      console.log('submit', form.value);
-      // ToDo: Send Email and Password to Server and create new User
+  async onSubmit(form: NgForm) {
+    if(this.isPasswordMatching() && form.valid) {
+      try {
+        let resp = await this.createNewAccount(this.email, this.password, this.passwordConfirm);
+        console.log(resp);
+        this.router.navigate(['/Login'], {queryParams: {email: this.email}});
+      } catch (error) {
+        console.log(error);
+      }
     }
+  }
+
+  async createNewAccount(email: string, password: string, passwordConfirm: string) {
+    let url = this.backendUrl + '/user/';
+    let data = {email, password, passwordConfirm};
+    return lastValueFrom(this.http.post(url, data));
   }
 
   toggleShowPassword(){

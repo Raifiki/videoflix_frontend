@@ -1,10 +1,16 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
 
 // import custom components
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { HttpClient } from '@angular/common/http';
+
+// import environment variables
+import { ENVIRONEMENT } from '../../environment/environment';
+import log from 'video.js/dist/types/utils/log';
 
 @Component({
   selector: 'app-login',
@@ -26,20 +32,27 @@ export class LoginComponent {
   password: string = '';
   rememberMe: boolean = false;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    this.setFormData()
-  }
+  backendURL = ENVIRONEMENT.backendUrl;
+
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router,
+    private http: HttpClient) {}
   
   ngOnInit(): void {
     const queryParams = this.route.snapshot.queryParams;
-    if(queryParams['email']) this.email = queryParams['email'];
+    (queryParams['email'])? this.email = queryParams['email'] : this.setFormData();
   }
 
-  onSubmit(form:NgForm){
-    if (true){
-      // ToDo: Check Login Data with Server and if correct save to local storate and redirect to Video dashboard, if not show error
-      this.handleLocalStorageData();
-      this.router.navigate(['/Dashboard']);
+  async onSubmit(form:NgForm){
+    if (form.valid) {
+      try {
+        let resp: any = await this.loginWithEmailPwd(this.email, this.password);
+        this.handleLocalStorageData(resp);
+        this.router.navigate(['/Dashboard']);
+      } catch (error) {
+        this.loginFailed = true;
+      }
     }
     else {
       this.loginFailed = true;
@@ -47,11 +60,17 @@ export class LoginComponent {
     }
   }
 
-  handleLocalStorageData(){
-    if(this.rememberMe)
-      this.storeLoginData(this.email, this.password);
-     else 
-      localStorage.removeItem('loginData');
+
+  async loginWithEmailPwd(email: string, password: string){
+    let url = this.backendURL + '/user/login/';
+    let data = {email, password};
+    return lastValueFrom(this.http.post(url, data));
+  }
+
+  handleLocalStorageData(credentials: {email:string ; token: string}){
+    if(this.rememberMe) this.storeLoginData(this.email, this.password);
+    else localStorage.removeItem('loginData');
+    this.storeCredentials(credentials)
   }
   toggleShowPassword(){
     if (this.iptElement.nativeElement.type === 'password')
@@ -63,6 +82,10 @@ export class LoginComponent {
   storeLoginData(email: string, password: string){
     let loginData = {email, password};
     localStorage.setItem('loginData', JSON.stringify(loginData));
+  }
+
+  storeCredentials(credentials: {email:string ; token: string}){
+    localStorage.setItem('credentials', JSON.stringify(credentials));
   }
 
   getLoginData():null | string {

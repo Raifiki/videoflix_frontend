@@ -4,7 +4,10 @@ import { FormsModule, NgForm } from '@angular/forms';
 // import custom components
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ENVIRONEMENT } from '../../environment/environment';
+import { lastValueFrom } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-resetpassword',
@@ -24,16 +27,40 @@ export class ResetpasswordComponent {
   password: string = '';
   passwordConfirm: string = '';
 
-  constructor(private router: Router) {}
+  pwdChangePermissionDenied: boolean = false;
 
-  onSubmit(form:NgForm) {
+  backendUrl = ENVIRONEMENT.backendUrl
+
+  constructor(
+    private router: Router, 
+    private http: HttpClient, 
+    private route: ActivatedRoute, ) {}
+
+  async onSubmit(form:NgForm) {
     // ToDo: get account from query parameter, (ideas: email, token, etc)
-    if (this.isPasswordMatching()) {
-      console.log('submitted reset pwd');
-      this.router.navigate(['/Login'], { queryParams: { email: 'leo@web.de' }});
-      localStorage.removeItem('loginData');
+    if (this.isPasswordMatching() && form.valid) {
+      try {
+        let resp: any = await this.changePwd(this.password, this.passwordConfirm);
+        this.router.navigate(['/Login'], { queryParams: { email: resp['email'] } });
+      } catch (error) {
+        console.log(error);
+        this.pwdChangePermissionDenied = true;
+      }
       // ToDo: Change pwd on Backend and redirect with email as query parameter
     }
+  }
+
+  async changePwd(new_password: string, new_passwordConfirm: string) {
+    let url = this.backendUrl + '/user/resetpasswordconfirm/';
+    let data = {new_password, new_passwordConfirm};
+    let [user_id, token] = this.getQueryParams();
+    return lastValueFrom(this.http.post(url, data, {params: {user_id, token}}));
+  }
+
+  getQueryParams() {
+    const queryParams = this.route.snapshot.queryParams;
+    let [user_id, token] = (queryParams['token'])? [queryParams['user_id'], queryParams['token']] : ['', ''];
+    return [user_id, token];
   }
 
   toggleShowPassword(){
