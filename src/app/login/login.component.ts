@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 // import environment variables
 import { ENVIRONEMENT } from '../../environment/environment';
 import log from 'video.js/dist/types/utils/log';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -34,6 +35,8 @@ export class LoginComponent {
 
   backendURL = ENVIRONEMENT.backendUrl;
 
+  userService = inject(UserService)
+
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
@@ -49,6 +52,7 @@ export class LoginComponent {
       try {
         let resp: any = await this.loginWithEmailPwd(this.email, this.password);
         this.handleLocalStorageData(resp);
+        this.userService.setActiveUser(resp);
         this.router.navigate(['/Dashboard']);
       } catch (error) {
         this.loginFailed = true;

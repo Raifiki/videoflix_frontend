@@ -7,7 +7,7 @@
     <div class="video-list" #scrollContainer>
         @for (video of category.videos; track video) {
             <div class="video-details">
-                <img src='{{ video.getPosterImage() }}' alt="" routerLink="/Video/{{video.id}}">
+                <img src='{{ video.thumbnail }}' alt="" routerLink="/Video/{{video.id}}">
                 <h3>{{video.name}}</h3>
             </div>
         }

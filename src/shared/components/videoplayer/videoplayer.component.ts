@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import videojs from 'video.js';
 import VideoJsPlayer from 'video.js/dist/types/player';
 
@@ -16,11 +16,12 @@ export class VideoplayerComponent implements OnInit, OnDestroy {
     autoplay: boolean,
     controls: boolean,
     fill: boolean,
-    sources: {
-        src: string,
-        type: string,
-    }[],
   };
+
+  @Input() source?:{
+    src: string,
+    type: string,
+  }
 
   player!: VideoJsPlayer;
 
@@ -28,17 +29,24 @@ export class VideoplayerComponent implements OnInit, OnDestroy {
     private elementRef: ElementRef,
   ) {}
 
-    // Instantiate a Video.js player OnInit
     ngOnInit() {
-      this.player = videojs(this.target.nativeElement, this.options, function onPlayerReady() {
-        console.log('onPlayerReady', this);
-      });
+      this.initPlayer();
+    }
+    ngOnChanges(changes: SimpleChanges) {
+      if (changes['source']) {
+        this.source =  changes['source'].currentValue;
+        if (this.player) this.player.src([this.source]);
+      }
     }
 
-      // Dispose the player OnDestroy
   ngOnDestroy() {
     if (this.player) {
       this.player.dispose();
     }
+  }
+
+  initPlayer() {
+    this.player = videojs(this.target.nativeElement, this.options);
+    if (this.source?.src != '') this.player.src([this.source]);
   }
 }

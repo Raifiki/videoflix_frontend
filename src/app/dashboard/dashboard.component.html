@@ -7,19 +7,20 @@
         </button>
     </div>
     <div class="dashboard-preview-wrapper">
-        <h1>Video Name</h1>
-        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempore perferendis fuga doloribus quidem, voluptatum, magnam nesciunt, illo omnis officiis repellat aliquam repellendus ipsam animi maiores debitis tempora mollitia numquam?</span>
+        <h1>{{previewVideo.name}}</h1>
+        <span>{{previewVideo.description}}</span>
         <button class="btn btn-primary" (click)="startVideo()">
             <img src="assets/icons/play_arrow.svg" alt="">
             <span>Play</span>
         </button>
-        <app-videoplayer [options]="{
-        fluid: true,
-        fill: false,
-        autoplay: true, 
-        controls: false, 
-        sources: 
-            [{ src: 'assets/videos/example1.mp4', type: 'video/mp4' }]}"></app-videoplayer>
+        <app-videoplayer 
+            [options]="{
+                fluid: true,
+                fill: false,
+                autoplay: true, 
+                controls: false }"
+            [source]="{ src: previewVideo.path, type: 'video/mp4' }">
+        </app-videoplayer>
         <div class="dashboard-filter-lg-preview"></div>
     </div>
     <div class="dashboard-video-offer-wrapper">

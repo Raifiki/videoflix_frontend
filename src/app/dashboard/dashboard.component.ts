@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 // import custom components
 import { VideoplayerComponent } from '../../shared/components/videoplayer/videoplayer.component';
-import { Router } from '@angular/router';
+import { CategoryComponent } from './category/category.component';
 
 // import custom interfaces and models
 import { Librarycategory } from '../../shared/definitions/interfaces';
 import { Video } from '../../shared/definitions/models';
-import { CategoryComponent } from './category/category.component';
+
+// import custom services
+import { VideoService } from '../services/video.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,97 +23,52 @@ import { CategoryComponent } from './category/category.component';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-  // move to service start
-  videoLibrary: Librarycategory[] = [
-    {name: 'Action',
-     videos: [
-      new Video({
-        name: 'Video 1',
-        path: 'assets/videos/example1.mp4',
-        description: 'Video 1 Description',
-        genre: 'Action',
-        id: 'videoID1'}),
-      new Video({
-        name: 'Video 2',
-        path: 'assets/videos/example1.mp4',
-        description: 'Video 2 Description',
-        genre: 'Action',
-        id: 'videoID2'}),
-      new Video({
-        name: 'Video 3',
-        path: 'assets/videos/example1.mp4',
-        description: 'Video 3 Description',
-        genre: 'Action',
-        id: 'videoID3'}),
-      ]},
-    {name: 'Comedy',
-      videos: [
-        new Video({
-          name: 'Video 1',
-          path: 'assets/videos/example1.mp4',
-          description: 'Video 1 Description',
-          genre: 'Comedy',
-          id: 'videoID4'}),
-        new Video({
-          name: 'Video 2',
-          path: 'assets/videos/example1.mp4',
-          description: 'Video 2 Description',
-          genre: 'Comedy',
-          id: 'videoID5'}),
-        new Video({
-          name: 'Video 3',
-          path: 'assets/videos/example1.mp4',
-          description: 'Video 3 Description',
-          genre: 'Comedy',
-          id: 'videoID6'}),
-          new Video({
-            name: 'Video 1',
-            path: 'assets/videos/example1.mp4',
-            description: 'Video 1 Description',
-            genre: 'Comedy',
-            id: 'videoID7'}),
-          new Video({
-            name: 'Video 2',
-            path: 'assets/videos/example1.mp4',
-            description: 'Video 2 Description',
-            genre: 'Comedy',
-            id: 'videoID8'}),
-          new Video({
-            name: 'Video 3',
-            path: 'assets/videos/example1.mp4',
-            description: 'Video 3 Description',
-            genre: 'Comedy',
-            id: 'videoID9'}),
-            new Video({
-              name: 'Video 1',
-              path: 'assets/videos/example1.mp4',
-              description: 'Video 1 Description',
-              genre: 'Comedy',
-              id: 'videoID10'}),
-            new Video({
-              name: 'Video 2',
-              path: 'assets/videos/example1.mp4',
-              description: 'Video 2 Description',
-              genre: 'Comedy',
-              id: 'videoID11'}),
-            new Video({
-              name: 'Video 3',
-              path: 'assets/videos/example1.mp4',
-              description: 'Video 3 Description',
-              genre: 'Comedy',
-              id: 'videoID12'}),
-        ]}
-  ];
+  videoLibrary: Librarycategory[] = [];
+  videoService = inject(VideoService);
 
-  // move to service end
+  previewVideo:Video = new Video();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    effect(() => {
+      this.generateVideoLib();
+      this.updatePreviewVideo(this.getRandomVideo());
+    });
+  }
+  
+  ngOnInit(): void {
+    this.videoService.getVideos();
+  }
   logout(){
-    // ToDo: Logout User
+    this.logoutUser();
     this.router.navigate(['/Login']);
   }
 
   startVideo(){
     // ToDo: Start Video in video Player
   }
+
+  logoutUser(){
+    localStorage.removeItem('credentials');
+  }
+
+  generateVideoLib(){
+    this.videoLibrary = [];
+    this.videoService.genres().forEach((genre: string) => {
+      let genreVideos = this.videoService.videos().filter((video: Video) => video.genre === genre);
+      this.videoLibrary.push({name: genre, videos: genreVideos});
+    })
+  }
+
+  getRandomVideo(){
+    if(this.videoService.videos().length === 0)
+      return new Video()
+    let video = this.videoService.videos()[Math.floor(Math.random() * this.videoService.videos().length)];
+    return video
+  }
+
+  updatePreviewVideo(video: Video){
+    this.previewVideo = video;  
+  }
+
+
 }
