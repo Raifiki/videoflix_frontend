@@ -1,5 +1,5 @@
 import { Component, effect, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 // import custom components
 import { VideoplayerComponent } from '../../shared/components/videoplayer/videoplayer.component';
@@ -17,7 +17,8 @@ import { VideoService } from '../services/video.service';
   standalone: true,
   imports: [
     VideoplayerComponent,
-    CategoryComponent
+    CategoryComponent,
+    RouterModule
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'

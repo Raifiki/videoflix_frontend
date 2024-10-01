@@ -9,7 +9,7 @@
     <div class="dashboard-preview-wrapper">
         <h1>{{previewVideo.name}}</h1>
         <span>{{previewVideo.description}}</span>
-        <button class="btn btn-primary" (click)="startVideo()">
+        <button class="btn btn-primary" routerLink="/Video/{{previewVideo.id}}">
             <img src="assets/icons/play_arrow.svg" alt="">
             <span>Play</span>
         </button>
