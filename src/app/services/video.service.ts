@@ -48,8 +48,6 @@ export class VideoService {
     }
 
   getProperVideoObject(obj: any) {
-    console.log(obj);
-    
     return new Video({
       name : obj.title,
       path : obj.video,
@@ -65,8 +63,6 @@ export class VideoService {
     BEdata.forEach((videoBEdata: any) => {
       videos.push(new Video(this.getProperVideoObject(videoBEdata)));
     })
-    console.log(videos);
-    
     this.videos.set(videos);
   }
 
