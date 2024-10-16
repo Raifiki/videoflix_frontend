@@ -35,6 +35,8 @@ export class LoginComponent {
 
   backendURL = ENVIRONEMENT.backendUrl;
 
+  waitForServerResponse: boolean = false;
+
   userService = inject(UserService)
 
   constructor(
@@ -50,12 +52,14 @@ export class LoginComponent {
   async onSubmit(form:NgForm){
     if (form.valid) {
       try {
+        this.waitForServerResponse = true;
         let resp: any = await this.loginWithEmailPwd(this.email, this.password);
         this.handleLocalStorageData(resp);
         this.userService.setActiveUser(resp);
         this.router.navigate(['/Dashboard']);
       } catch (error) {
         this.loginFailed = true;
+        this.waitForServerResponse = false;
       }
     }
     else {

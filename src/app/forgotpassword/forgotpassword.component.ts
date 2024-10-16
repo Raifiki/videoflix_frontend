@@ -25,16 +25,21 @@ export class ForgotpasswordComponent {
   backendUrl = ENVIRONEMENT.backendUrl;
 
   emailNotRegistered: boolean = false;
+  emailSend: boolean = false;
+  waitForServerResponse: boolean = false;
 
   constructor(private http: HttpClient) { }
 
   async onSubmit(form: NgForm) {
     if (form.valid) {
       try {
+        this.waitForServerResponse = true;
         let resp: any = await this.sendResetPwdEmail(form.value.email);
-        console.log(resp);
+        this.waitForServerResponse = false;
+        this.emailNotRegistered = false;
+        this.emailSend = true;
       } catch (error) {
-        console.log(error);
+        this.waitForServerResponse = false;
         this.emailNotRegistered = true;
       }
     }

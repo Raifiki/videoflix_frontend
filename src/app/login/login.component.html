@@ -27,8 +27,9 @@
                     <span>Wrong email or password, please try again</span>
                 </div>
             }
-            <button class="btn btn-primary" [disabled]="loginForm.invalid">
+            <button class="btn btn-primary" [disabled]="loginForm.invalid || waitForServerResponse">
                 <span>Log in</span>
+                @if (waitForServerResponse) {<div class="loader"></div>}
             </button>
         </form>
 

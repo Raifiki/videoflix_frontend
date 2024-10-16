@@ -32,8 +32,9 @@
                     <span>Password must match</span>
                 </div>
             }
-            <button class="btn btn-primary" [disabled]="signupForm.invalid ">
+            <button class="btn btn-primary" [disabled]="signupForm.invalid || waitForServerResponse">
                 <span>Get Started</span>
+                @if (waitForServerResponse) {<div class="loader"></div>}
             </button>
         </form>
     </div>

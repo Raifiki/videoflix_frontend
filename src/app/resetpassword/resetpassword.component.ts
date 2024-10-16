@@ -28,6 +28,7 @@ export class ResetpasswordComponent {
   passwordConfirm: string = '';
 
   pwdChangePermissionDenied: boolean = false;
+  waitForServerResponse: boolean = false;
 
   backendUrl = ENVIRONEMENT.backendUrl
 
@@ -37,16 +38,15 @@ export class ResetpasswordComponent {
     private route: ActivatedRoute, ) {}
 
   async onSubmit(form:NgForm) {
-    // ToDo: get account from query parameter, (ideas: email, token, etc)
     if (this.isPasswordMatching() && form.valid) {
       try {
+        this.waitForServerResponse = true;
         let resp: any = await this.changePwd(this.password, this.passwordConfirm);
         this.router.navigate(['/Login'], { queryParams: { email: resp['email'] } });
       } catch (error) {
-        console.log(error);
+        this.waitForServerResponse = false;
         this.pwdChangePermissionDenied = true;
       }
-      // ToDo: Change pwd on Backend and redirect with email as query parameter
     }
   }
 

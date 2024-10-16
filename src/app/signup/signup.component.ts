@@ -31,6 +31,8 @@ export class SignupComponent {
 
   backendUrl = ENVIRONEMENT.backendUrl;
 
+  waitForServerResponse: boolean = false;
+
   constructor(
     private route: ActivatedRoute, 
     private router: Router, 
@@ -44,11 +46,11 @@ export class SignupComponent {
   async onSubmit(form: NgForm) {
     if(this.isPasswordMatching() && form.valid) {
       try {
+        this.waitForServerResponse = true;
         let resp = await this.createNewAccount(this.email, this.password, this.passwordConfirm);
-        console.log(resp);
         this.router.navigate(['/Login'], {queryParams: {email: this.email}});
       } catch (error) {
-        console.log(error);
+        this.waitForServerResponse = false;
       }
     }
   }
