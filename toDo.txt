@@ -1,0 +1,6 @@
+- Add loading if app is waiting for server response
+- add overlays/info field if email is send
+- video selection --> video is selected on previewVideo --> play --> open video player
+- upload video data, categories + videos
+- send email to correct email, at the moment email is send always to my email
+- make responsive design

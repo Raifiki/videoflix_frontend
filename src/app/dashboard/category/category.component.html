@@ -6,8 +6,9 @@
     }
     <div class="video-list" #scrollContainer>
         @for (video of category.videos; track video) {
-            <div class="video-details">
-                <img src='{{ video.thumbnail }}' alt="" routerLink="/Video/{{video.id}}">
+            <div class="video-details" (click)="selectVideo(video.id)">
+                <!-- <img src='{{ video.thumbnail }}' alt="" routerLink="/Video/{{video.id}}"> -->
+                <img src='{{ video.thumbnail }}' alt="">
                 <h3>{{video.name}}</h3>
             </div>
         }

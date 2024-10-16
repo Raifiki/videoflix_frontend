@@ -20,6 +20,8 @@ export class VideoService {
   videos: WritableSignal<Video[]> = signal([]);
   genres: WritableSignal<string[]> = signal([]);
 
+  selectedVideo: WritableSignal<Video> = signal(new Video());
+
   userService = inject(UserService)
 
   backendUrl = ENVIRONEMENT.backendUrl
@@ -44,26 +46,26 @@ export class VideoService {
         this.getVideoDatafromServer(token).then((data: any) => this.generateVideoList(data));
         this.getGenresDatafromServer(token).then((data: any) => this.generateGenresList(data));
       }
-      
     }
-
-  getProperVideoObject(obj: any) {
-    return new Video({
-      name : obj.title,
-      path : obj.video,
-      description : obj.description,
-      genre : this.getVideoGenreFromBEData(obj.genre),
-      id : obj.uuid,
-      thumbnail : obj.thumbnail,
-    })
-  }
-
-  generateVideoList(BEdata:any) {
-    let videos: Video[] = []
-    BEdata.forEach((videoBEdata: any) => {
-      videos.push(new Video(this.getProperVideoObject(videoBEdata)));
-    })
-    this.videos.set(videos);
+    
+    getProperVideoObject(obj: any) {
+      return new Video({
+        name : obj.title,
+        path : obj.video,
+        description : obj.description,
+        genre : this.getVideoGenreFromBEData(obj.genre),
+        id : obj.uuid,
+        thumbnail : obj.thumbnail,
+      })
+    }
+    
+    generateVideoList(BEdata:any) {
+      let videos: Video[] = []
+      BEdata.forEach((videoBEdata: any) => {
+        videos.push(new Video(this.getProperVideoObject(videoBEdata)));
+      })
+      this.videos.set(videos);
+      this.selectedVideo.set(this.getRandomVideo());
   }
 
   generateGenresList(BEdata:any) {
@@ -76,6 +78,18 @@ export class VideoService {
 
   getVideoGenreFromBEData(genre: any) {
     return (genre != null)? genre.name : undefined
+  }
+
+  selectVideo(videoId: string) {
+    let video = this.videos().filter((video: Video) => video.id === videoId)[0];
+    this.selectedVideo.set(video);
+  }
+
+  getRandomVideo(){
+    if(this.videos().length === 0)
+      return new Video()
+    let video = this.videos()[Math.floor(Math.random() * this.videos().length)];
+    return video
   }
   
 }

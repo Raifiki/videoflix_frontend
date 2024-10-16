@@ -1,8 +1,11 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 // import custom interfaces and models
 import { Librarycategory } from '../../../shared/definitions/interfaces';
-import { RouterModule } from '@angular/router';
+
+// import custom services
+import { VideoService } from '../../services/video.service';
 
 @Component({
   selector: 'app-category',
@@ -15,6 +18,8 @@ export class CategoryComponent {
   @Input() category!: Librarycategory;
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
+
+  videoService = inject(VideoService);
 
   isScrollable: boolean = false;
 
@@ -35,4 +40,9 @@ export class CategoryComponent {
   scrollRight() {
     this.scrollContainer.nativeElement.scrollBy({ left: 250, behavior: 'smooth' });
   }
+
+  selectVideo(videoId: string) {
+    this.videoService.selectVideo(videoId);
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, computed, effect, inject, signal, Signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 // import custom components
@@ -27,26 +27,24 @@ export class DashboardComponent {
   videoLibrary: Librarycategory[] = [];
   videoService = inject(VideoService);
 
-  previewVideo:Video = new Video();
+  previewVideo: Signal <Video> = signal(new Video());
 
   constructor(private router: Router) {
     effect(() => {
       this.generateVideoLib();
-      this.updatePreviewVideo(this.getRandomVideo());
+      //this.updatePreviewVideo(this.getRandomVideo());
     });
+    this.previewVideo = computed(() => this.videoService.selectedVideo());
   }
   
   ngOnInit(): void {
-    this.videoService.getVideos();
+    if(this.videoService.videos().length == 0) this.videoService.getVideos();
   }
   logout(){
     this.logoutUser();
     this.router.navigate(['/Login']);
   }
 
-  startVideo(){
-    // ToDo: Start Video in video Player
-  }
 
   logoutUser(){
     localStorage.removeItem('credentials');
@@ -68,7 +66,7 @@ export class DashboardComponent {
   }
 
   updatePreviewVideo(video: Video){
-    this.previewVideo = video;  
+    //this.previewVideo = video;  
   }
 
 
