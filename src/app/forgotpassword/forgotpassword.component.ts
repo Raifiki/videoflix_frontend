@@ -39,8 +39,9 @@ export class ForgotpasswordComponent {
         this.emailNotRegistered = false;
         this.emailSend = true;
       } catch (error) {
-        this.waitForServerResponse = false;
+        this.emailSend = false;
         this.emailNotRegistered = true;
+        this.waitForServerResponse = false;
       }
     }
   }
