@@ -34,6 +34,9 @@
         flex-direction: column;
         gap: 32px;
         width: 100%;
+        .ipt-pwd{
+            width: 80%;
+        }
         > button{
             align-self: center;
         }
@@ -45,5 +48,13 @@
                 color: $err-color;
             }
         }
+    }
+
+    @media (max-width: 750px) { 
+        width: calc(100% - 100px);
+    }
+    @media (max-width: 500px) { 
+        padding: 32px 24px;
+        width: calc(100% - 40px);
     }
 }

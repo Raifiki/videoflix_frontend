@@ -1,0 +1,14 @@
+.showResponsive{
+    display: none;
+}
+
+
+
+@media (max-width: 750px) {
+    .showResponsive{
+        display: block;
+    }
+    .hideResponsive{
+        display: none;
+    }
+}

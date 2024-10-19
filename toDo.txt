@@ -1,3 +1,2 @@
 - upload video data, categories + videos
-- send email to correct email, at the moment email is send always to my email
 - make responsive design

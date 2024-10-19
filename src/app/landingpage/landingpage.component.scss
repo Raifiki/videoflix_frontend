@@ -22,6 +22,7 @@
     align-items: center;
     gap: 24px;
     color: $fnt-color-light;
+    padding: 10px 96px;
     > h1{
         font-size: 48px;
     }
@@ -39,5 +40,21 @@
         input{
             flex-grow: 2;
         }
+    }
+
+    @media (max-width: 750px) {
+        padding: 10px 50px;
+        align-items: flex-start;
+        > form{
+            flex-direction: column;
+            align-items: center;
+            >input{
+                width: 100%;
+            }
+        }
+    }
+
+    @media (max-width: 500px) {
+        padding: 10px 20px;
     }
 }

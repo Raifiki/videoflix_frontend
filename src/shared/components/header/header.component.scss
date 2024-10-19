@@ -7,4 +7,12 @@
     >img{
         cursor: pointer;
     }
+
+    @media (max-width: 750px) {
+        padding: 10px 50px;
+    }
+
+    @media (max-width: 500px) {
+        padding: 10px 20px;
+    }
 }

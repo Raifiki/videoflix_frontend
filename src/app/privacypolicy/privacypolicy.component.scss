@@ -13,13 +13,19 @@
         height: 108px;
     }
 
+    @media (max-width: 750px) {
+        padding: 10px 50px;
+    }
+
+    @media (max-width: 500px) {
+        padding: 10px 20px;
+    }
 }
 
 .privacypolicy-content{
     flex-grow: 2;
     margin-top: 60px;
     color: $fnt-color-light;
-    //overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,5 +46,25 @@
         >h4{
             font-size: 18px;
         }
+        a{
+            word-wrap: break-word;
+        }
     }
+    @media (max-width: 750px) {
+        > h1{
+            font-size: 32px;	
+        }
+        > div{
+            >h2{
+                font-size: 24px;
+            }
+            >h3{
+                font-size: 18px;
+            }
+            >h4{
+                font-size: 14px;
+            }
+        }
+    }
+
 }

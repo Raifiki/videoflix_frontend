@@ -5,6 +5,7 @@
         position: absolute;
         display: flex;
         align-items: center;
+        gap: 8px;
         justify-content: space-between;
         padding: 20px 32px;
         width: 100vw;
@@ -18,6 +19,7 @@
         >.video-resolution-selector{
             display: flex;
             gap: 8px;
+            flex-wrap: wrap;
             >.btn-icon{
                 mask-image: url('./../../assets/icons/settings.svg');
             }
@@ -25,6 +27,8 @@
         > img{
             cursor: pointer;
         }
+        @media (max-width: 500px) {
+            padding: 10px 20px;
+        }
     }
-
 }

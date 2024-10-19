@@ -12,6 +12,13 @@
         align-items: center;
         height: 108px;
     }
+    @media (max-width: 750px) {
+        padding: 10px 50px;
+    }
+
+    @media (max-width: 500px) {
+        padding: 10px 20px;
+    }
 
 }
 
@@ -34,5 +41,13 @@
         >h2{
             font-size: 32px;
         }
+    }
+    @media (max-width: 500px) {
+        > h1{
+            font-size: 32px;	
+        }
+        > div>h2{
+                font-size: 24px;
+            }
     }
 }

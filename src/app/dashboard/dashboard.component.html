@@ -3,16 +3,10 @@
         <img src="assets/img/logo_short.svg" alt="">
         <button class="btn btn-primary" (click)="logout()">
             <img src="assets/icons/logout.svg" alt="">
-            <span>Log Out</span>
+            <span >Log Out</span>
         </button>
     </div>
     <div class="dashboard-preview-wrapper">
-        <h1>{{previewVideo().name}}</h1>
-        <span>{{previewVideo().description}}</span>
-        <button class="btn btn-primary" routerLink="/Video/{{previewVideo().id}}">
-            <img src="assets/icons/play_arrow.svg" alt="">
-            <span>Play</span>
-        </button>
         <app-videoplayer 
             [options]="{
                 fluid: true,
@@ -21,6 +15,12 @@
                 controls: false }"
             [source]="{ src: previewVideo().path, type: 'video/mp4' }">
         </app-videoplayer>
+        <h1>{{previewVideo().name}}</h1>
+        <span>{{previewVideo().description}}</span>
+        <button class="btn btn-primary" routerLink="/Video/{{previewVideo().id}}">
+            <img src="assets/icons/play_arrow.svg" alt="">
+            <span>Play</span>
+        </button>
         <div class="dashboard-filter-lg-preview"></div>
     </div>
     <div class="dashboard-video-offer-wrapper">

@@ -18,6 +18,13 @@
         justify-content: space-between;
         height: 108px;
         z-index: 2;
+        @media (max-width: 750px) {
+            padding: 10px 50px;
+        }
+    
+        @media (max-width: 500px) {
+            padding: 10px 20px;
+        }
     }
     >.dashboard-preview-wrapper{
         display: flex;
@@ -57,6 +64,23 @@
             z-index: 1;
         }
     }
+    @media (max-width: 750px) {
+        padding-top: 120px;
+        padding-left: 50px;
+        >.dashboard-preview-wrapper{
+            > h1{
+                font-size: 48px;
+            }
+            > app-videoplayer{
+                top: 108px;
+            }
+        }
+    }
+    @media (max-width: 750px) {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
 }
 
 .dashboard-video-offer-wrapper{
@@ -67,5 +91,8 @@
     margin-top: 150px;
     > app-category{
         z-index: 2;
+    }
+    @media (max-width: 750px) {
+        margin-top: 50px;
     }
 }
