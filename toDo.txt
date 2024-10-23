@@ -4,7 +4,7 @@
     - Einstallungen Qauli nach unten
     - Esc zurück ins Dashboard
     - Autoplay
-- Scrollbalken in Videoplayer (Responsive)
+- Scrollbalken in Videoplayer (Responsive) --> done
 - Backendcode
     - ale Kommentare löschen
     - Alle Files/Ordner Löschen die nicht gebraucht werden

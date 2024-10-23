@@ -16,6 +16,8 @@ export class VideoplayerComponent implements OnInit, OnDestroy {
     autoplay: boolean,
     controls: boolean,
     fill: boolean,
+    muted: boolean,
+    responsive?: boolean,
   };
 
   @Input() source?:{
@@ -46,6 +48,7 @@ export class VideoplayerComponent implements OnInit, OnDestroy {
   }
 
   initPlayer() {
+    this.options.responsive = true;
     this.player = videojs(this.target.nativeElement, this.options);
     if (this.source?.src != '') this.player.src([this.source]);
   }
