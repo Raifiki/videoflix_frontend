@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom, timeout } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 // import custom components
 import { HeaderComponent } from '../../shared/components/header/header.component';
@@ -33,6 +33,7 @@ export class SignupComponent {
 
   waitForServerResponse: boolean = false;
   emailSend:boolean = false;
+  emailAlreadyRegistered: boolean = false;
 
   constructor(
     private route: ActivatedRoute, 
@@ -48,12 +49,14 @@ export class SignupComponent {
     if(this.isPasswordMatching() && form.valid) {
       try {
         this.waitForServerResponse = true;
+        this.emailAlreadyRegistered = false;
         let resp = await this.createNewAccount(this.email, this.password, this.passwordConfirm);
         this.waitForServerResponse = false;
         this.emailSend = true;
         setTimeout(() => this.router.navigate(['/Login'], {queryParams: {email: this.email}}), 10000); 
       } catch (error) {
         this.waitForServerResponse = false;
+        this.emailAlreadyRegistered = true;
       }
     }
   }
@@ -80,6 +83,10 @@ export class SignupComponent {
 
   isPasswordMatching(): boolean {
     return this.password === this.passwordConfirm && this.password !== '';
+  }
+
+  clearEmailIsRegistered() {
+    this.emailAlreadyRegistered = false;
   }
 
 }
