@@ -32,6 +32,12 @@
                     <span>Password must match</span>
                 </div>
             }
+            @if (emailSend) {
+                <div class="success-wrapper">
+                    <img src="assets/icons/check-circle.svg" alt="">
+                    <span>Welcome to Videoflix. We send you an email to activate your account</span>
+                </div>
+            }
             <button class="btn btn-primary" [disabled]="signupForm.invalid || waitForServerResponse">
                 <span>Get Started</span>
                 @if (waitForServerResponse) {<div class="loader"></div>}

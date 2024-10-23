@@ -27,6 +27,12 @@
                     <span>Wrong email or password, please try again</span>
                 </div>
             }
+            @if (accountNotVerified) {
+                <div class="warning-wrapper">
+                    <img src="assets/icons/information.svg" alt="">
+                    <span>Your Account is not verified, yet. Please follow the instructions sent to your email.</span>
+                </div>
+            }
             <button class="btn btn-primary" [disabled]="loginForm.invalid || waitForServerResponse">
                 <span>Log in</span>
                 @if (waitForServerResponse) {<div class="loader"></div>}

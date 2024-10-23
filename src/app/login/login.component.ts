@@ -6,7 +6,7 @@ import { lastValueFrom } from 'rxjs';
 // import custom components
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 // import environment variables
 import { ENVIRONEMENT } from '../../environment/environment';
@@ -36,6 +36,7 @@ export class LoginComponent {
   backendURL = ENVIRONEMENT.backendUrl;
 
   waitForServerResponse: boolean = false;
+  accountNotVerified: boolean = false;
 
   userService = inject(UserService)
 
@@ -53,12 +54,15 @@ export class LoginComponent {
     if (form.valid) {
       try {
         this.waitForServerResponse = true;
+        this.accountNotVerified = false;
+        this.loginFailed = false;
         let resp: any = await this.loginWithEmailPwd(this.email, this.password);
         this.handleLocalStorageData(resp);
         this.userService.setActiveUser(resp);
         this.router.navigate(['/Dashboard']);
       } catch (error) {
-        this.loginFailed = true;
+        let err = error as HttpErrorResponse;
+        (err.error.detail === 'email adress not verified')? this.accountNotVerified = true : this.loginFailed = true;
         this.waitForServerResponse = false;
       }
     }

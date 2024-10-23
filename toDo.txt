@@ -1,2 +1,11 @@
-- upload video data, categories + videos
-- make responsive design
+- Feedback das verfification email gesendet wurde --> done 
+- Richtiges Feedback das Account noch bestätigt werden muss, nicht Wrong email etc --> done
+- optionale: 
+    - Einstallungen Qauli nach unten
+    - Esc zurück ins Dashboard
+    - Autoplay
+- Scrollbalken in Videoplayer (Responsive)
+- Backendcode
+    - ale Kommentare löschen
+    - Alle Files/Ordner Löschen die nicht gebraucht werden
+    - Code Doku hinzufügen

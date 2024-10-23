@@ -57,6 +57,14 @@
                 color: $err-color;
             }
         }
+        > .warning-wrapper{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            > span{
+                color: $warn-color;
+            }
+        }
     }
 
     @media (max-width: 750px) { 

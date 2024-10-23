@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, timeout } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 // import custom components
@@ -32,6 +32,7 @@ export class SignupComponent {
   backendUrl = ENVIRONEMENT.backendUrl;
 
   waitForServerResponse: boolean = false;
+  emailSend:boolean = false;
 
   constructor(
     private route: ActivatedRoute, 
@@ -48,7 +49,9 @@ export class SignupComponent {
       try {
         this.waitForServerResponse = true;
         let resp = await this.createNewAccount(this.email, this.password, this.passwordConfirm);
-        this.router.navigate(['/Login'], {queryParams: {email: this.email}});
+        this.waitForServerResponse = false;
+        this.emailSend = true;
+        setTimeout(() => this.router.navigate(['/Login'], {queryParams: {email: this.email}}), 10000); 
       } catch (error) {
         this.waitForServerResponse = false;
       }
